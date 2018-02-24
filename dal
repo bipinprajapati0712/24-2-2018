@@ -1,0 +1,128 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using Account;
+using customer;
+
+namespace DAL
+{
+    public class Dal
+    {
+        public int ADD(Class1 P)
+        {
+            SqlConnection con = new SqlConnection("server=intvmsql01;user id=PJ09TMS101_1718;password=tcstvm;database=DB09TMS101_1718");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Account_ka_procedure", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cid", P.Customerid);
+            cmd.Parameters.AddWithValue("@am", P.Amount);
+            cmd.Parameters.AddWithValue("@asd", P.Date);
+            cmd.Parameters.AddWithValue("@aty", P.Atype);
+            cmd.Parameters.AddWithValue("@ast", P.Status);
+            cmd.Parameters.AddWithValue("@aid", 0);
+            cmd.Parameters["@aid"].Direction = ParameterDirection.Output;
+            try
+            {
+
+                int roeff = cmd.ExecuteNonQuery();
+                if (roeff > 0)
+                    return Convert.ToInt32(cmd.Parameters["@aid"].Value);
+                else
+                    return 0;
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+        }
+            public List<cust> View()
+             {
+            SqlConnection con = new SqlConnection("server=intvmsql01; user id =PJ09TMS101_1718;password=tcstvm;database=DB09TMS101_1718");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("viewing_ka_stored_procedure", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<cust> customerlist = new List<cust>();
+            while(reader.Read())
+            {
+                cust s = new cust();
+                s.Cid = Convert.ToInt32(reader["cid"]);
+                s.Name =Convert.ToString( reader["cname"]);
+                s.City= reader["city"].ToString();
+                s.Gender = reader["gender"].ToString();
+                s.Birth =Convert.ToDateTime(reader["birth"]);
+                s.Contact = Convert.ToInt64(reader["contact"]);
+              
+                customerlist.Add(s);
+
+            }
+            return customerlist;
+        }
+        public List<cust> custid(int sid)
+        {
+            cust obj = new cust();
+            SqlConnection con =new SqlConnection("server=intvmsql01; user id =PJ09TMS101_1718;password=tcstvm;database=DB09TMS101_1718");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("cust_by_id1", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@id", sid);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<cust> customerlist = new List<cust>();
+            while (reader.Read())
+            {
+                cust s = new cust();
+                s.Cid = Convert.ToInt32(reader["cid"]);
+                s.Name = Convert.ToString(reader["cname"]);
+                s.City = reader["city"].ToString();
+                s.Gender = reader["gender"].ToString();
+                s.Birth = Convert.ToDateTime(reader["birth"]);
+                s.Contact = Convert.ToInt64(reader["contact"]);
+
+                customerlist.Add(s);
+
+            }
+            return customerlist;
+
+            
+        }
+        public List<Class1> ViewAcc()
+        {
+            SqlConnection con = new SqlConnection("server=intvmsql01; user id =PJ09TMS101_1718;password=tcstvm;database=DB09TMS101_1718");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("acc_ka_view", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<Class1> Alist = new List<Class1>();
+            while (reader.Read())
+            {
+                Class1 s = new Class1();
+                s.Customerid = Convert.ToInt32(reader["cid"]);
+                double dm = Convert.ToDouble(reader["amount"]);
+            //    s.Amount = float(dm);
+                s.Date = Convert.ToDateTime(reader["asd"]);
+                s.Atype = reader["account_type"].ToString();
+                s.Status = reader["astatus"].ToString();
+
+                Alist.Add(s);
+                /*
+                  cid int foreign key references mera_customer_11(cid),
+ aid int identity(1000,1),
+ amount float,
+ asd date,
+ account_type varchar(20),
+ astatus varchar(20),*/
+
+            }
+            return Alist;
+
+        }
+
+
+
+    }
+}
