@@ -1,0 +1,30 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="mera_project.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            font-weight: normal;
+            text-decoration: underline;
+            color: #0000FF;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <h1 align="center"> <span class="auto-style1"><em>TCS BANK</em></span> </h1>
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+         <h3 align="center"> <em>WE VALUE YOUR MONEY</em></h3>
+    </form>
+</body>
+</html>
