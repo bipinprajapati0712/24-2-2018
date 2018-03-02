@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CABBOOKING
+{
+    interface ICabDetails
+    {
+        int Book_ref_num { get; set; }
+        string Pass_name { get; set; }
+        string From_loc { get; set; }
+        DateTime Dep_time { get; set; }
+        string To_loc { get; set; }
+        double Loc_dist { get; set; }
+        double Amount { get; set; }
+        string Cab_type { get; set; }
+        long Contact_num { get; set; }
+    }
+}
