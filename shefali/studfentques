@@ -1,0 +1,10 @@
+Develop  a menu driven Console application  for the Assessment System: Write a class called StudentDetails with the following properties Provide the constructor(s) for this class
+Name DateofBirth Gender City UGPercentage Exam Center(It will be TVM or AHD) Exam Name(Problem solving, ASP.NET Layering, ASP.NET MVC) Fees(If UGPercentage is greater than 80, the fees will be 2000.  If UGPercentage is less than 80, the fees will be 3000)
+Add  ExamOperation class for the following four  operations: 1. Get appointment for an exam 2. View all students registered for specific exam 3. Number of students registered  for specific exam 4. Cancel the appointment for an exam Create two interfaces I StudentDetails and  IExamOperation CRUD1: Get appointment for an exam
+The System should ask the following Inputs form the user: Name,DateofBirth,City,CollgeName,UGPercentage,Exam Center,Exam Name Calculate fees from the UGPercentage. It should add all the details into the List< StudentDetails> then returns Registration Number (It should be starting from 5000)  which was generated automatically.
+CRUD2: View all students registered for specific exam
+The System should ask the following Input form the user:  Exam Name It should display all the student  details applied for that particular exam. If the provided  exam name is not in the list, it should display a proper warning message to the user.
+CRUD3: Number of students registered  for specific exam The System should ask the following Input form the user:  Exam Name It should display number of  students  registered for that particular exam.
+CRUD4: Cancel  Booking by the  Registration Number 
+The system should ask the following input from the user :  Registration Number .It should delete all the details associated with the provided  Registration Number from the list. If the provided  Registration Number  is not in the list, it should display a proper warning message to the user.
+Complete this scenario using Interfaces, Constructor, Properties, Generic List. Handle all the run time exceptions using Exception handling mechanism.
