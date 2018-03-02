@@ -1,0 +1,12 @@
+Develop  a menu driven Console application  for the Cab Management System: Write a class called CabDetails with the following properties Provide the constructor(s) for this class Booking Reference Number Passenger Name From Location Departure Time To Location Distance in Km Estimated Amount Cab Type Cab Contact Number 
+Set the constant Rental Amount Per Km is 45 rs.
+Add a CabOperation class for the following four  operations: 1. Book a Cab 2. View Booking Details for the specific Booking Reference Number 3. Update From Location, To Location, Departure Time 4. Cancel the Booking by the  Booking Reference Number Create two interfaces ICabDetails and  IcabOperation CRUD1: Book a Cab
+The System should ask the following Inputs form the user: Passenger Name,From Location, Departure Time, To Location, Distance in Km, Rental Amount Per Km, Cab Type ,Cab Contact Number. Calculate Estimated Amount from  Distance in Km and Rental Amount Per Km. It should add all the details into the List< ICabDetails> then returns Booking Reference Number (It should start from 5000)  which was generated automatically.
+CRUD2: View Booking Details for the specific Booking Reference Number 
+The System should ask the following Input form the user:  Booking Reference Number It should display the booking details for the provided  Booking Reference Number. If the provided  Booking Reference Number is not in the list, it should display a proper warning message to the user.
+CRUD3: Update From Location, To Location, Departure Time
+The system should ask the following inputs from the user :Booking Reference Number , From Location, To Location, Departure Time. It should update the new details for the provided  Booking Reference Number.
+If the provided  Booking Reference Number is not in the list, it should display a proper warning message to the user.
+CRUD4: Cancel the Booking by the  Booking Reference Number 
+The system should ask the following input from the user :  Booking Reference Number. It should delete the cab with the provided Booking Reference Number from the list. If the provided  Booking Reference Number is not in the list, it should display a proper warning message to the user.
+Complete this scenario using Interfaces, Constructor, Properties, Generic List. Handle all the run time exceptions too.
