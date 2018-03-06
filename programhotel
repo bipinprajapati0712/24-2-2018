@@ -1,0 +1,186 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace hotel_management_program
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int item_num;
+            string item_name="";
+            string category;
+            double price_per_unit=0;
+            int order_id;
+            DateTime order_date=DateTime.Now;
+            double amount;
+            string iname;
+            double price_canopy = 15;
+            double price_mushroomfry = 10;
+            double price_maggi = 15;
+            double price_owmlet = 15;
+            double price_kawab = 25;
+            double price_biryani = 30;
+            int flag = 0;
+            int choice=0;
+            double price=0;
+            List<Item> on = new List<Item>();
+            List<Order> od = new List<Order>();
+            Order r = new Order();
+            Item s = new Item();
+            IHotel m = new Hotel();
+            do
+            {
+                Console.WriteLine("1.add an item");
+                Console.WriteLine("2.view all items");
+                Console.WriteLine("3.update price of an item");
+                Console.WriteLine("4.order an item");
+                Console.WriteLine("5.view all orders");
+                Console.WriteLine("6.cancel an order");
+                do
+                {
+                    Console.WriteLine("enter choice of operation");
+                    try
+                    {
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        flag = 1;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("improper choice of operation" + e.Message);
+                        flag = 0;
+                    }
+                } while (flag == 0);
+                switch (choice)
+                {
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine("enter category of food:veg or nonveg");
+                            category = Console.ReadLine();
+                            if (category.Equals("veg"))
+                            {
+                                do
+                                {
+                                    Console.WriteLine("enter item among canopy,mushroomfry and maggi");
+                                    item_name = Console.ReadLine();
+                                    if ((item_name.Equals("canopy")) || (item_name.Equals("canopy")) || (item_name.Equals("canopy")))
+                                    {
+                                        flag = 1;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("improper choice of item");
+                                        flag = 0;
+                                    }
+                                } while (flag == 0);
+                                flag = 1;
+                            }
+                            else if (category.Equals("nonveg"))
+                            {
+                                do
+                                {
+                                    Console.WriteLine("enter item among owmlet,kawab and biryani");
+                                    item_name = Console.ReadLine();
+                                    if ((item_name.Equals("owmlet")) || (item_name.Equals("kawab")) || (item_name.Equals("biryani")))
+                                    {
+                                        flag = 1;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("improper choice of item");
+                                        flag = 0;
+                                    }
+                                } while (flag == 0);
+                                flag = 0;
+                            }
+                        } while (flag == 0);
+                        if (item_name.Equals("canopy"))
+                        {
+                            price_per_unit = price_canopy;
+                        }
+                        else if (item_name.Equals("mushroomfry"))
+                        {
+                            price_per_unit = price_mushroomfry;
+                        }
+                        else if (item_name.Equals("maggi"))
+                        {
+                            price_per_unit = price_maggi;
+                        }
+                        else if (item_name.Equals("owmlet"))
+                        {
+                            price_per_unit = price_owmlet;
+                        }
+                        else if (item_name.Equals("kawab"))
+                        {
+                            price_per_unit = price_kawab;
+                        }
+                        else if (item_name.Equals("biryani"))
+                        {
+                            price_per_unit = price_biryani;
+                        }
+                        order_id = m.add_item(s);
+                        on.Add(s);
+                        Console.WriteLine("item added with id:" + order_id);
+
+                        break;
+                    case 2:
+                        on = m.view_all();
+                        foreach (Item k in on)
+                        {
+                            Console.WriteLine("category :" + k.Category);
+                            Console.WriteLine("item name :" + k.Item_name);
+                            Console.WriteLine("item name :" + k.Item_num);
+                        }
+                        break;
+                    case 3:
+
+                        Console.WriteLine("enter name of item");
+                        item_name = Console.ReadLine();
+                        do
+                        {
+                            Console.WriteLine("new price");
+                            try
+                            {
+                                price = Convert.ToDouble(Console.ReadLine());
+                                flag = 1;
+                            }
+                            catch (Exception e)
+                            {
+                                flag = 0;
+                            }
+                        } while (flag == 0);
+                        Console.WriteLine("original price:" + price_per_unit);
+                        Console.WriteLine("updated price:" + price);
+                        price_per_unit = m.update(item_name, price);
+
+                        break;
+                    case 4:
+
+                        Console.WriteLine("enter item name to be ordered");
+                        iname = Console.ReadLine();
+                        amount = price_per_unit;
+                        Console.WriteLine("enter item id");
+                        item_num = Convert.ToInt32(Console.ReadLine());
+                        order_id = m.order_item(r);
+                        od.Add(r);
+                        Console.WriteLine("order id:" + order_id);
+                        break;
+                    case 5:
+                        od = m.view_all_orders();
+                        foreach (Order k in od)
+                        {
+                            Console.WriteLine("item name:" + k.Iname);
+                            Console.WriteLine("item id:" + k.Item_id);
+                            Console.WriteLine("order id:" + k.Order_id);
+                            Console.WriteLine("order date:" + k.Order_date);
+                        }
+                        break;
+                    case 6:
+                        break;
+                }
+            } while (choice < 7);
+        }
+    }
+}
